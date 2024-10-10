@@ -2685,21 +2685,21 @@ const util_metadata = {
   attributes: {
     url: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     caption: {
       type: "rich-text",
       source: "rich-text",
       selector: "figcaption",
-      __experimentalRole: "content"
+      role: "content"
     },
     type: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     providerNameSlug: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     allowResponsive: {
       type: "boolean",
@@ -2708,12 +2708,12 @@ const util_metadata = {
     responsive: {
       type: "boolean",
       "default": false,
-      __experimentalRole: "content"
+      role: "content"
     },
     previewable: {
       type: "boolean",
       "default": true,
-      __experimentalRole: "content"
+      role: "content"
     }
   },
   supports: {
@@ -3581,24 +3581,24 @@ const audio_metadata = {
   attributes: {
     blob: {
       type: "string",
-      __experimentalRole: "local"
+      role: "local"
     },
     src: {
       type: "string",
       source: "attribute",
       selector: "audio",
       attribute: "src",
-      __experimentalRole: "content"
+      role: "content"
     },
     caption: {
       type: "rich-text",
       source: "rich-text",
       selector: "figcaption",
-      __experimentalRole: "content"
+      role: "content"
     },
     id: {
       type: "number",
-      __experimentalRole: "content"
+      role: "content"
     },
     autoplay: {
       type: "boolean",
@@ -4904,7 +4904,6 @@ const linkOff = /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(ex
 
 
 
-
 /**
  * WordPress dependencies
  */
@@ -5088,7 +5087,7 @@ function ButtonEdit(props) {
     if (!isSelected) {
       return {};
     }
-    const blockBindingsSource = unlock(select(external_wp_blocks_namespaceObject.store)).getBlockBindingsSource(metadata?.bindings?.url?.source);
+    const blockBindingsSource = (0,external_wp_blocks_namespaceObject.getBlockBindingsSource)(metadata?.bindings?.url?.source);
     return {
       lockUrlControls: !!metadata?.bindings?.url && !blockBindingsSource?.canUserEditValue?.({
         select,
@@ -5317,34 +5316,34 @@ const button_metadata = {
       source: "attribute",
       selector: "a",
       attribute: "href",
-      __experimentalRole: "content"
+      role: "content"
     },
     title: {
       type: "string",
       source: "attribute",
       selector: "a,button",
       attribute: "title",
-      __experimentalRole: "content"
+      role: "content"
     },
     text: {
       type: "rich-text",
       source: "rich-text",
       selector: "a,button",
-      __experimentalRole: "content"
+      role: "content"
     },
     linkTarget: {
       type: "string",
       source: "attribute",
       selector: "a",
       attribute: "target",
-      __experimentalRole: "content"
+      role: "content"
     },
     rel: {
       type: "string",
       source: "attribute",
       selector: "a",
       attribute: "rel",
-      __experimentalRole: "content"
+      role: "content"
     },
     placeholder: {
       type: "string"
@@ -6435,7 +6434,7 @@ const categories_metadata = {
     },
     label: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     showLabel: {
       type: "boolean",
@@ -14917,6 +14916,8 @@ function CoverEdit({
   const isUploadingMedia = isTemporaryMedia(id, url);
   const isImageBackground = IMAGE_BACKGROUND_TYPE === backgroundType;
   const isVideoBackground = VIDEO_BACKGROUND_TYPE === backgroundType;
+  const blockEditingMode = (0,external_wp_blockEditor_namespaceObject.useBlockEditingMode)();
+  const hasNonContentControls = blockEditingMode === 'default';
   const [resizeListener, {
     height,
     width
@@ -15047,7 +15048,7 @@ function CoverEdit({
   };
   if (!useFeaturedImage && !hasInnerBlocks && !hasBackground) {
     return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_ReactJSXRuntime_namespaceObject.Fragment, {
-      children: [blockControls, inspectorControls, isSelected && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(ResizableCoverPopover, {
+      children: [blockControls, inspectorControls, hasNonContentControls && isSelected && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(ResizableCoverPopover, {
         ...resizableCoverProps
       }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(TagName, {
         ...blockProps,
@@ -15141,7 +15142,7 @@ function CoverEdit({
       }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
         ...innerBlocksProps
       })]
-    }), isSelected && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(ResizableCoverPopover, {
+    }), hasNonContentControls && isSelected && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(ResizableCoverPopover, {
       ...resizableCoverProps
     })]
   });
@@ -16882,21 +16883,21 @@ const transforms_metadata = {
   attributes: {
     url: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     caption: {
       type: "rich-text",
       source: "rich-text",
       selector: "figcaption",
-      __experimentalRole: "content"
+      role: "content"
     },
     type: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     providerNameSlug: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     allowResponsive: {
       type: "boolean",
@@ -16905,12 +16906,12 @@ const transforms_metadata = {
     responsive: {
       type: "boolean",
       "default": false,
-      __experimentalRole: "content"
+      role: "content"
     },
     previewable: {
       type: "boolean",
       "default": true,
-      __experimentalRole: "content"
+      role: "content"
     }
   },
   supports: {
@@ -17385,21 +17386,21 @@ const embed_deprecated_metadata = {
   attributes: {
     url: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     caption: {
       type: "rich-text",
       source: "rich-text",
       selector: "figcaption",
-      __experimentalRole: "content"
+      role: "content"
     },
     type: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     providerNameSlug: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     allowResponsive: {
       type: "boolean",
@@ -17408,12 +17409,12 @@ const embed_deprecated_metadata = {
     responsive: {
       type: "boolean",
       "default": false,
-      __experimentalRole: "content"
+      role: "content"
     },
     previewable: {
       type: "boolean",
       "default": true,
-      __experimentalRole: "content"
+      role: "content"
     }
   },
   supports: {
@@ -17520,21 +17521,21 @@ const embed_metadata = {
   attributes: {
     url: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     caption: {
       type: "rich-text",
       source: "rich-text",
       selector: "figcaption",
-      __experimentalRole: "content"
+      role: "content"
     },
     type: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     providerNameSlug: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     allowResponsive: {
       type: "boolean",
@@ -17543,12 +17544,12 @@ const embed_metadata = {
     responsive: {
       type: "boolean",
       "default": false,
-      __experimentalRole: "content"
+      role: "content"
     },
     previewable: {
       type: "boolean",
       "default": true,
-      __experimentalRole: "content"
+      role: "content"
     }
   },
   supports: {
@@ -18612,7 +18613,7 @@ const file_metadata = {
     },
     blob: {
       type: "string",
-      __experimentalRole: "local"
+      role: "local"
     },
     href: {
       type: "string"
@@ -19128,7 +19129,7 @@ const form_input_deprecated_v2 = {
       default: 'Label',
       selector: '.wp-block-form-input__label-content',
       source: 'html',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     inlineLabel: {
       type: 'boolean',
@@ -19146,7 +19147,7 @@ const form_input_deprecated_v2 = {
       selector: '.wp-block-form-input__input',
       source: 'attribute',
       attribute: 'placeholder',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     value: {
       type: 'string',
@@ -19243,7 +19244,7 @@ const form_input_deprecated_v1 = {
       default: 'Label',
       selector: '.wp-block-form-input__label-content',
       source: 'html',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     inlineLabel: {
       type: 'boolean',
@@ -19261,7 +19262,7 @@ const form_input_deprecated_v1 = {
       selector: '.wp-block-form-input__input',
       source: 'attribute',
       attribute: 'placeholder',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     value: {
       type: 'string',
@@ -19689,7 +19690,7 @@ const form_input_metadata = {
       "default": "Label",
       selector: ".wp-block-form-input__label-content",
       source: "rich-text",
-      __experimentalRole: "content"
+      role: "content"
     },
     inlineLabel: {
       type: "boolean",
@@ -19707,7 +19708,7 @@ const form_input_metadata = {
       selector: ".wp-block-form-input__input",
       source: "attribute",
       attribute: "placeholder",
-      __experimentalRole: "content"
+      role: "content"
     },
     value: {
       type: "string",
@@ -23702,7 +23703,7 @@ const heading_deprecated_v5 = {
       source: 'html',
       selector: 'h1,h2,h3,h4,h5,h6',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     level: {
       type: 'number',
@@ -24116,7 +24117,7 @@ const heading_metadata = {
       type: "rich-text",
       source: "rich-text",
       selector: "h1,h2,h3,h4,h5,h6",
-      __experimentalRole: "content"
+      role: "content"
     },
     level: {
       type: "number",
@@ -25211,7 +25212,7 @@ const image_deprecated_v6 = {
       source: 'attribute',
       selector: 'img',
       attribute: 'src',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     alt: {
       type: 'string',
@@ -25219,27 +25220,27 @@ const image_deprecated_v6 = {
       selector: 'img',
       attribute: 'alt',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     caption: {
       type: 'string',
       source: 'html',
       selector: 'figcaption',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     title: {
       type: 'string',
       source: 'attribute',
       selector: 'img',
       attribute: 'title',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     href: {
       type: 'string',
       source: 'attribute',
       selector: 'figure > a',
       attribute: 'href',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     rel: {
       type: 'string',
@@ -25255,7 +25256,7 @@ const image_deprecated_v6 = {
     },
     id: {
       type: 'number',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     width: {
       type: 'number'
@@ -25397,7 +25398,7 @@ const image_deprecated_v7 = {
       source: 'attribute',
       selector: 'img',
       attribute: 'src',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     alt: {
       type: 'string',
@@ -25405,27 +25406,27 @@ const image_deprecated_v7 = {
       selector: 'img',
       attribute: 'alt',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     caption: {
       type: 'string',
       source: 'html',
       selector: 'figcaption',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     title: {
       type: 'string',
       source: 'attribute',
       selector: 'img',
       attribute: 'title',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     href: {
       type: 'string',
       source: 'attribute',
       selector: 'figure > a',
       attribute: 'href',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     rel: {
       type: 'string',
@@ -25441,7 +25442,7 @@ const image_deprecated_v7 = {
     },
     id: {
       type: 'number',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     width: {
       type: 'number'
@@ -25580,7 +25581,7 @@ const deprecated_v8 = {
       source: 'attribute',
       selector: 'img',
       attribute: 'src',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     alt: {
       type: 'string',
@@ -25588,27 +25589,27 @@ const deprecated_v8 = {
       selector: 'img',
       attribute: 'alt',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     caption: {
       type: 'string',
       source: 'html',
       selector: 'figcaption',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     title: {
       type: 'string',
       source: 'attribute',
       selector: 'img',
       attribute: 'title',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     href: {
       type: 'string',
       source: 'attribute',
       selector: 'figure > a',
       attribute: 'href',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     rel: {
       type: 'string',
@@ -25624,7 +25625,7 @@ const deprecated_v8 = {
     },
     id: {
       type: 'number',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     width: {
       type: 'string'
@@ -26252,17 +26253,14 @@ function image_Image({
       return {};
     }
     const {
-      getBlockBindingsSource
-    } = unlock(select(external_wp_blocks_namespaceObject.store));
-    const {
       url: urlBinding,
       alt: altBinding,
       title: titleBinding
     } = metadata?.bindings || {};
     const hasParentPattern = !!context['pattern/overrides'];
-    const urlBindingSource = getBlockBindingsSource(urlBinding?.source);
-    const altBindingSource = getBlockBindingsSource(altBinding?.source);
-    const titleBindingSource = getBlockBindingsSource(titleBinding?.source);
+    const urlBindingSource = (0,external_wp_blocks_namespaceObject.getBlockBindingsSource)(urlBinding?.source);
+    const altBindingSource = (0,external_wp_blocks_namespaceObject.getBlockBindingsSource)(altBinding?.source);
+    const titleBindingSource = (0,external_wp_blocks_namespaceObject.getBlockBindingsSource)(titleBinding?.source);
     return {
       lockUrlControls: !!urlBinding && !urlBindingSource?.canUserEditValue?.({
         select,
@@ -26735,7 +26733,6 @@ function useMaxWidthObserver() {
 
 
 
-
 /**
  * Module constants
  */
@@ -27023,7 +27020,7 @@ function ImageEdit({
     if (!isSingleSelected) {
       return {};
     }
-    const blockBindingsSource = unlock(select(external_wp_blocks_namespaceObject.store)).getBlockBindingsSource(metadata?.bindings?.url?.source);
+    const blockBindingsSource = (0,external_wp_blocks_namespaceObject.getBlockBindingsSource)(metadata?.bindings?.url?.source);
     return {
       lockUrlControls: !!metadata?.bindings?.url && !blockBindingsSource?.canUserEditValue?.({
         select,
@@ -27383,14 +27380,14 @@ const image_metadata = {
   attributes: {
     blob: {
       type: "string",
-      __experimentalRole: "local"
+      role: "local"
     },
     url: {
       type: "string",
       source: "attribute",
       selector: "img",
       attribute: "src",
-      __experimentalRole: "content"
+      role: "content"
     },
     alt: {
       type: "string",
@@ -27398,13 +27395,13 @@ const image_metadata = {
       selector: "img",
       attribute: "alt",
       "default": "",
-      __experimentalRole: "content"
+      role: "content"
     },
     caption: {
       type: "rich-text",
       source: "rich-text",
       selector: "figcaption",
-      __experimentalRole: "content"
+      role: "content"
     },
     lightbox: {
       type: "object",
@@ -27417,14 +27414,14 @@ const image_metadata = {
       source: "attribute",
       selector: "img",
       attribute: "title",
-      __experimentalRole: "content"
+      role: "content"
     },
     href: {
       type: "string",
       source: "attribute",
       selector: "figure > a",
       attribute: "href",
-      __experimentalRole: "content"
+      role: "content"
     },
     rel: {
       type: "string",
@@ -27440,7 +27437,7 @@ const image_metadata = {
     },
     id: {
       type: "number",
-      __experimentalRole: "content"
+      role: "content"
     },
     width: {
       type: "string"
@@ -28723,7 +28720,7 @@ const v0 = {
     ordered: {
       type: 'boolean',
       default: false,
-      __experimentalRole: 'content'
+      role: 'content'
     },
     values: {
       type: 'string',
@@ -28732,7 +28729,7 @@ const v0 = {
       multiline: 'li',
       __unstableMultilineWrapperTags: ['ol', 'ul'],
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     type: {
       type: 'string'
@@ -28797,7 +28794,7 @@ const list_deprecated_v1 = {
     ordered: {
       type: 'boolean',
       default: false,
-      __experimentalRole: 'content'
+      role: 'content'
     },
     values: {
       type: 'string',
@@ -28806,7 +28803,7 @@ const list_deprecated_v1 = {
       multiline: 'li',
       __unstableMultilineWrapperTags: ['ol', 'ul'],
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     type: {
       type: 'string'
@@ -28880,7 +28877,7 @@ const list_deprecated_v2 = {
     ordered: {
       type: 'boolean',
       default: false,
-      __experimentalRole: 'content'
+      role: 'content'
     },
     values: {
       type: 'string',
@@ -28889,7 +28886,7 @@ const list_deprecated_v2 = {
       multiline: 'li',
       __unstableMultilineWrapperTags: ['ol', 'ul'],
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     type: {
       type: 'string'
@@ -28973,7 +28970,7 @@ const list_deprecated_v3 = {
     ordered: {
       type: 'boolean',
       default: false,
-      __experimentalRole: 'content'
+      role: 'content'
     },
     values: {
       type: 'string',
@@ -28982,7 +28979,7 @@ const list_deprecated_v3 = {
       multiline: 'li',
       __unstableMultilineWrapperTags: ['ol', 'ul'],
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     type: {
       type: 'string'
@@ -29600,7 +29597,7 @@ const list_metadata = {
     ordered: {
       type: "boolean",
       "default": false,
-      __experimentalRole: "content"
+      role: "content"
     },
     values: {
       type: "string",
@@ -29609,7 +29606,7 @@ const list_metadata = {
       multiline: "li",
       __unstableMultilineWrapperTags: ["ol", "ul"],
       "default": "",
-      __experimentalRole: "content"
+      role: "content"
     },
     type: {
       type: "string"
@@ -30327,7 +30324,7 @@ const list_item_metadata = {
       type: "rich-text",
       source: "rich-text",
       selector: "li",
-      __experimentalRole: "content"
+      role: "content"
     }
   },
   supports: {
@@ -30743,29 +30740,29 @@ const v6Attributes = {
     selector: 'figure img',
     attribute: 'alt',
     default: '',
-    __experimentalRole: 'content'
+    role: 'content'
   },
   mediaId: {
     type: 'number',
-    __experimentalRole: 'content'
+    role: 'content'
   },
   mediaUrl: {
     type: 'string',
     source: 'attribute',
     selector: 'figure video,figure img',
     attribute: 'src',
-    __experimentalRole: 'content'
+    role: 'content'
   },
   href: {
     type: 'string',
     source: 'attribute',
     selector: 'figure a',
     attribute: 'href',
-    __experimentalRole: 'content'
+    role: 'content'
   },
   mediaType: {
     type: 'string',
-    __experimentalRole: 'content'
+    role: 'content'
   }
 };
 const v7Attributes = {
@@ -32548,7 +32545,7 @@ const media_text_metadata = {
       selector: "figure img",
       attribute: "alt",
       "default": "",
-      __experimentalRole: "content"
+      role: "content"
     },
     mediaPosition: {
       type: "string",
@@ -32556,14 +32553,14 @@ const media_text_metadata = {
     },
     mediaId: {
       type: "number",
-      __experimentalRole: "content"
+      role: "content"
     },
     mediaUrl: {
       type: "string",
       source: "attribute",
       selector: "figure video,figure img",
       attribute: "src",
-      __experimentalRole: "content"
+      role: "content"
     },
     mediaLink: {
       type: "string"
@@ -32582,7 +32579,7 @@ const media_text_metadata = {
       source: "attribute",
       selector: "figure a",
       attribute: "href",
-      __experimentalRole: "content"
+      role: "content"
     },
     rel: {
       type: "string",
@@ -32598,7 +32595,7 @@ const media_text_metadata = {
     },
     mediaType: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     mediaWidth: {
       type: "number",
@@ -40460,7 +40457,7 @@ const {
       type: "rich-text",
       source: "rich-text",
       selector: "p",
-      __experimentalRole: "content"
+      role: "content"
     },
     dropCap: {
       type: "boolean",
@@ -40582,7 +40579,7 @@ const paragraph_metadata = {
       type: "rich-text",
       source: "rich-text",
       selector: "p",
-      __experimentalRole: "content"
+      role: "content"
     },
     dropCap: {
       type: "boolean",
@@ -45439,7 +45436,7 @@ const preformatted_metadata = {
       source: "rich-text",
       selector: "pre",
       __unstablePreserveWhiteSpace: true,
-      __experimentalRole: "content"
+      role: "content"
     }
   },
   supports: {
@@ -45603,14 +45600,14 @@ const pullquote_deprecated_v5 = {
       source: 'html',
       selector: 'blockquote',
       multiline: 'p',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     citation: {
       type: 'string',
       source: 'html',
       selector: 'cite',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     textAlign: {
       type: 'string'
@@ -46350,13 +46347,13 @@ const pullquote_metadata = {
       type: "rich-text",
       source: "rich-text",
       selector: "p",
-      __experimentalRole: "content"
+      role: "content"
     },
     citation: {
       type: "rich-text",
       source: "rich-text",
       selector: "cite",
-      __experimentalRole: "content"
+      role: "content"
     },
     textAlign: {
       type: "string"
@@ -47490,7 +47487,7 @@ function FormatControls({
   }, []);
   const formats = POST_FORMATS.filter(item => supportedFormats.includes(item.value));
   const values = normalizedFormats.map(name => formats.find(item => item.value === name)?.label).filter(Boolean);
-  const suggestions = formats.filter(item => !format.includes(item.value)).map(item => item.label);
+  const suggestions = formats.filter(item => !normalizedFormats.includes(item.value)).map(item => item.label);
   return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.FormTokenField, {
     label: (0,external_wp_i18n_namespaceObject.__)('Formats'),
     value: values,
@@ -50495,14 +50492,14 @@ const quote_deprecated_v4 = {
       selector: 'blockquote',
       multiline: 'p',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     citation: {
       type: 'string',
       source: 'html',
       selector: 'cite',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     align: {
       type: 'string'
@@ -50570,14 +50567,14 @@ const quote_deprecated_v3 = {
       selector: 'blockquote',
       multiline: 'p',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     citation: {
       type: 'string',
       source: 'html',
       selector: 'cite',
       default: '',
-      __experimentalRole: 'content'
+      role: 'content'
     },
     align: {
       type: 'string'
@@ -51128,13 +51125,13 @@ const quote_metadata = {
       selector: "blockquote",
       multiline: "p",
       "default": "",
-      __experimentalRole: "content"
+      role: "content"
     },
     citation: {
       type: "rich-text",
       source: "rich-text",
       selector: "cite",
-      __experimentalRole: "content"
+      role: "content"
     },
     textAlign: {
       type: "string"
@@ -51423,15 +51420,12 @@ function ReusableBlockEdit({
       getSettings,
       getBlockEditingMode
     } = select(external_wp_blockEditor_namespaceObject.store);
-    const {
-      getBlockBindingsSource
-    } = unlock(select(external_wp_blocks_namespaceObject.store));
     // For editing link to the site editor if the theme and user permissions support it.
     return {
       innerBlocks: getBlocks(patternClientId),
       onNavigateToEntityRecord: getSettings().onNavigateToEntityRecord,
       editingMode: getBlockEditingMode(patternClientId),
-      hasPatternOverridesSource: !!getBlockBindingsSource('core/pattern-overrides')
+      hasPatternOverridesSource: !!(0,external_wp_blocks_namespaceObject.getBlockBindingsSource)('core/pattern-overrides')
     };
   }, [patternClientId]);
 
@@ -52723,7 +52717,7 @@ const search_metadata = {
   attributes: {
     label: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     showLabel: {
       type: "boolean",
@@ -52732,7 +52726,7 @@ const search_metadata = {
     placeholder: {
       type: "string",
       "default": "",
-      __experimentalRole: "content"
+      role: "content"
     },
     width: {
       type: "number"
@@ -52742,7 +52736,7 @@ const search_metadata = {
     },
     buttonText: {
       type: "string",
-      __experimentalRole: "content"
+      role: "content"
     },
     buttonPosition: {
       type: "string",
@@ -60212,7 +60206,7 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-/* global Reflect, Promise, SuppressedError, Symbol */
+/* global Reflect, Promise, SuppressedError, Symbol, Iterator */
 
 var extendStatics = function(d, b) {
   extendStatics = Object.setPrototypeOf ||
@@ -60323,8 +60317,8 @@ function __awaiter(thisArg, _arguments, P, generator) {
 }
 
 function __generator(thisArg, body) {
-  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+  return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
   function verb(n) { return function (v) { return step([n, v]); }; }
   function step(op) {
       if (f) throw new TypeError("Generator is already executing.");
@@ -60428,8 +60422,9 @@ function __await(v) {
 function __asyncGenerator(thisArg, _arguments, generator) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var g = generator.apply(thisArg, _arguments || []), i, q = [];
-  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-  function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+  return i = Object.create((typeof AsyncIterator === "function" ? AsyncIterator : Object).prototype), verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function () { return this; }, i;
+  function awaitReturn(f) { return function (v) { return Promise.resolve(v).then(f, reject); }; }
+  function verb(n, f) { if (g[n]) { i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; if (f) i[n] = f(i[n]); } }
   function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
   function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
   function fulfill(value) { resume("next", value); }
@@ -60495,16 +60490,18 @@ function __classPrivateFieldIn(state, receiver) {
 function __addDisposableResource(env, value, async) {
   if (value !== null && value !== void 0) {
     if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
-    var dispose;
+    var dispose, inner;
     if (async) {
-        if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
-        dispose = value[Symbol.asyncDispose];
+      if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
+      dispose = value[Symbol.asyncDispose];
     }
     if (dispose === void 0) {
-        if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
-        dispose = value[Symbol.dispose];
+      if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
+      dispose = value[Symbol.dispose];
+      if (async) inner = dispose;
     }
     if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
+    if (inner) dispose = function() { try { inner.call(this); } catch (e) { return Promise.reject(e); } };
     env.stack.push({ value: value, dispose: dispose, async: async });
   }
   else if (async) {
@@ -60523,17 +60520,22 @@ function __disposeResources(env) {
     env.error = env.hasError ? new _SuppressedError(e, env.error, "An error was suppressed during disposal.") : e;
     env.hasError = true;
   }
+  var r, s = 0;
   function next() {
-    while (env.stack.length) {
-      var rec = env.stack.pop();
+    while (r = env.stack.pop()) {
       try {
-        var result = rec.dispose && rec.dispose.call(rec.value);
-        if (rec.async) return Promise.resolve(result).then(next, function(e) { fail(e); return next(); });
+        if (!r.async && s === 1) return s = 0, env.stack.push(r), Promise.resolve().then(next);
+        if (r.dispose) {
+          var result = r.dispose.call(r.value);
+          if (r.async) return s |= 2, Promise.resolve(result).then(next, function(e) { fail(e); return next(); });
+        }
+        else s |= 1;
       }
       catch (e) {
-          fail(e);
+        fail(e);
       }
     }
+    if (s === 1) return env.hasError ? Promise.reject(env.error) : Promise.resolve();
     if (env.hasError) throw env.error;
   }
   return next();
@@ -62448,7 +62450,7 @@ const verse_deprecated_v2 = {
       selector: 'pre',
       default: '',
       __unstablePreserveWhiteSpace: true,
-      __experimentalRole: 'content'
+      role: 'content'
     },
     textAlign: {
       type: 'string'
@@ -62648,7 +62650,7 @@ const verse_metadata = {
       source: "rich-text",
       selector: "pre",
       __unstablePreserveWhiteSpace: true,
-      __experimentalRole: "content"
+      role: "content"
     },
     textAlign: {
       type: "string"
@@ -62800,7 +62802,7 @@ const video_deprecated_metadata = {
       type: "rich-text",
       source: "rich-text",
       selector: "figcaption",
-      __experimentalRole: "content"
+      role: "content"
     },
     controls: {
       type: "boolean",
@@ -62811,7 +62813,7 @@ const video_deprecated_metadata = {
     },
     id: {
       type: "number",
-      __experimentalRole: "content"
+      role: "content"
     },
     loop: {
       type: "boolean",
@@ -62840,14 +62842,14 @@ const video_deprecated_metadata = {
     },
     blob: {
       type: "string",
-      __experimentalRole: "local"
+      role: "local"
     },
     src: {
       type: "string",
       source: "attribute",
       selector: "video",
       attribute: "src",
-      __experimentalRole: "content"
+      role: "content"
     },
     playsInline: {
       type: "boolean",
@@ -62856,7 +62858,7 @@ const video_deprecated_metadata = {
       attribute: "playsinline"
     },
     tracks: {
-      __experimentalRole: "content",
+      role: "content",
       type: "array",
       items: {
         type: "object"
@@ -63770,7 +63772,7 @@ const video_metadata = {
       type: "rich-text",
       source: "rich-text",
       selector: "figcaption",
-      __experimentalRole: "content"
+      role: "content"
     },
     controls: {
       type: "boolean",
@@ -63781,7 +63783,7 @@ const video_metadata = {
     },
     id: {
       type: "number",
-      __experimentalRole: "content"
+      role: "content"
     },
     loop: {
       type: "boolean",
@@ -63810,14 +63812,14 @@ const video_metadata = {
     },
     blob: {
       type: "string",
-      __experimentalRole: "local"
+      role: "local"
     },
     src: {
       type: "string",
       source: "attribute",
       selector: "video",
       attribute: "src",
-      __experimentalRole: "content"
+      role: "content"
     },
     playsInline: {
       type: "boolean",
@@ -63826,7 +63828,7 @@ const video_metadata = {
       attribute: "playsinline"
     },
     tracks: {
-      __experimentalRole: "content",
+      role: "content",
       type: "array",
       items: {
         type: "object"

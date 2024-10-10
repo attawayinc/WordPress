@@ -5845,6 +5845,9 @@ __webpack_require__.d(__webpack_exports__, {
   doBlocksMatchTemplate: () => (/* reexport */ doBlocksMatchTemplate),
   findTransform: () => (/* reexport */ findTransform),
   getBlockAttributes: () => (/* reexport */ getBlockAttributes),
+  getBlockAttributesNamesByRole: () => (/* reexport */ getBlockAttributesNamesByRole),
+  getBlockBindingsSource: () => (/* reexport */ getBlockBindingsSource),
+  getBlockBindingsSources: () => (/* reexport */ getBlockBindingsSources),
   getBlockContent: () => (/* reexport */ getBlockInnerHTML),
   getBlockDefaultClassName: () => (/* reexport */ getBlockDefaultClassName),
   getBlockFromExample: () => (/* reexport */ getBlockFromExample),
@@ -5880,6 +5883,7 @@ __webpack_require__.d(__webpack_exports__, {
   pasteHandler: () => (/* reexport */ pasteHandler),
   privateApis: () => (/* reexport */ privateApis),
   rawHandler: () => (/* reexport */ rawHandler),
+  registerBlockBindingsSource: () => (/* reexport */ registerBlockBindingsSource),
   registerBlockCollection: () => (/* reexport */ registerBlockCollection),
   registerBlockStyle: () => (/* reexport */ registerBlockStyle),
   registerBlockType: () => (/* reexport */ registerBlockType),
@@ -5894,6 +5898,7 @@ __webpack_require__.d(__webpack_exports__, {
   store: () => (/* reexport */ store),
   switchToBlockType: () => (/* reexport */ switchToBlockType),
   synchronizeBlocksWithTemplate: () => (/* reexport */ synchronizeBlocksWithTemplate),
+  unregisterBlockBindingsSource: () => (/* reexport */ unregisterBlockBindingsSource),
   unregisterBlockStyle: () => (/* reexport */ unregisterBlockStyle),
   unregisterBlockType: () => (/* reexport */ unregisterBlockType),
   unregisterBlockVariation: () => (/* reexport */ unregisterBlockVariation),
@@ -5901,6 +5906,18 @@ __webpack_require__.d(__webpack_exports__, {
   updateCategory: () => (/* reexport */ categories_updateCategory),
   validateBlock: () => (/* reexport */ validateBlock),
   withBlockContentContext: () => (/* reexport */ withBlockContentContext)
+});
+
+// NAMESPACE OBJECT: ./node_modules/@wordpress/blocks/build-module/store/private-selectors.js
+var private_selectors_namespaceObject = {};
+__webpack_require__.r(private_selectors_namespaceObject);
+__webpack_require__.d(private_selectors_namespaceObject, {
+  getAllBlockBindingsSources: () => (getAllBlockBindingsSources),
+  getBlockBindingsSource: () => (private_selectors_getBlockBindingsSource),
+  getBootstrappedBlockType: () => (getBootstrappedBlockType),
+  getSupportedStyles: () => (getSupportedStyles),
+  getUnprocessedBlockTypes: () => (getUnprocessedBlockTypes),
+  hasContentRoleAttribute: () => (hasContentRoleAttribute)
 });
 
 // NAMESPACE OBJECT: ./node_modules/@wordpress/blocks/build-module/store/selectors.js
@@ -5926,17 +5943,6 @@ __webpack_require__.d(selectors_namespaceObject, {
   hasChildBlocks: () => (selectors_hasChildBlocks),
   hasChildBlocksWithInserterSupport: () => (selectors_hasChildBlocksWithInserterSupport),
   isMatchingSearchTerm: () => (isMatchingSearchTerm)
-});
-
-// NAMESPACE OBJECT: ./node_modules/@wordpress/blocks/build-module/store/private-selectors.js
-var private_selectors_namespaceObject = {};
-__webpack_require__.r(private_selectors_namespaceObject);
-__webpack_require__.d(private_selectors_namespaceObject, {
-  getAllBlockBindingsSources: () => (getAllBlockBindingsSources),
-  getBlockBindingsSource: () => (private_selectors_getBlockBindingsSource),
-  getBootstrappedBlockType: () => (getBootstrappedBlockType),
-  getSupportedStyles: () => (getSupportedStyles),
-  getUnprocessedBlockTypes: () => (getUnprocessedBlockTypes)
 });
 
 // NAMESPACE OBJECT: ./node_modules/@wordpress/blocks/build-module/store/actions.js
@@ -5989,7 +5995,7 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-/* global Reflect, Promise, SuppressedError, Symbol */
+/* global Reflect, Promise, SuppressedError, Symbol, Iterator */
 
 var extendStatics = function(d, b) {
   extendStatics = Object.setPrototypeOf ||
@@ -6100,8 +6106,8 @@ function __awaiter(thisArg, _arguments, P, generator) {
 }
 
 function __generator(thisArg, body) {
-  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+  return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
   function verb(n) { return function (v) { return step([n, v]); }; }
   function step(op) {
       if (f) throw new TypeError("Generator is already executing.");
@@ -6205,8 +6211,9 @@ function __await(v) {
 function __asyncGenerator(thisArg, _arguments, generator) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var g = generator.apply(thisArg, _arguments || []), i, q = [];
-  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-  function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+  return i = Object.create((typeof AsyncIterator === "function" ? AsyncIterator : Object).prototype), verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function () { return this; }, i;
+  function awaitReturn(f) { return function (v) { return Promise.resolve(v).then(f, reject); }; }
+  function verb(n, f) { if (g[n]) { i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; if (f) i[n] = f(i[n]); } }
   function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
   function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
   function fulfill(value) { resume("next", value); }
@@ -6272,16 +6279,18 @@ function __classPrivateFieldIn(state, receiver) {
 function __addDisposableResource(env, value, async) {
   if (value !== null && value !== void 0) {
     if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
-    var dispose;
+    var dispose, inner;
     if (async) {
-        if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
-        dispose = value[Symbol.asyncDispose];
+      if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
+      dispose = value[Symbol.asyncDispose];
     }
     if (dispose === void 0) {
-        if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
-        dispose = value[Symbol.dispose];
+      if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
+      dispose = value[Symbol.dispose];
+      if (async) inner = dispose;
     }
     if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
+    if (inner) dispose = function() { try { inner.call(this); } catch (e) { return Promise.reject(e); } };
     env.stack.push({ value: value, dispose: dispose, async: async });
   }
   else if (async) {
@@ -6300,17 +6309,22 @@ function __disposeResources(env) {
     env.error = env.hasError ? new _SuppressedError(e, env.error, "An error was suppressed during disposal.") : e;
     env.hasError = true;
   }
+  var r, s = 0;
   function next() {
-    while (env.stack.length) {
-      var rec = env.stack.pop();
+    while (r = env.stack.pop()) {
       try {
-        var result = rec.dispose && rec.dispose.call(rec.value);
-        if (rec.async) return Promise.resolve(result).then(next, function(e) { fail(e); return next(); });
+        if (!r.async && s === 1) return s = 0, env.stack.push(r), Promise.resolve().then(next);
+        if (r.dispose) {
+          var result = r.dispose.call(r.value);
+          if (r.async) return s |= 2, Promise.resolve(result).then(next, function(e) { fail(e); return next(); });
+        }
+        else s |= 1;
       }
       catch (e) {
-          fail(e);
+        fail(e);
       }
     }
+    if (s === 1) return env.hasError ? Promise.reject(env.error) : Promise.resolve();
     if (env.hasError) throw env.error;
   }
   return next();
@@ -6481,6 +6495,9 @@ const external_wp_element_namespaceObject = window["wp"]["element"];
 const external_wp_dom_namespaceObject = window["wp"]["dom"];
 ;// CONCATENATED MODULE: external ["wp","richText"]
 const external_wp_richText_namespaceObject = window["wp"]["richText"];
+;// CONCATENATED MODULE: external ["wp","deprecated"]
+const external_wp_deprecated_namespaceObject = window["wp"]["deprecated"];
+var external_wp_deprecated_default = /*#__PURE__*/__webpack_require__.n(external_wp_deprecated_namespaceObject);
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/blocks/build-module/api/constants.js
 const BLOCK_ICON_DEFAULT = 'block-default';
 
@@ -7509,12 +7526,11 @@ const unregisterBlockVariation = (blockName, variationName) => {
  *
  * @param {Object}   source                    Properties of the source to be registered.
  * @param {string}   source.name               The unique and machine-readable name.
- * @param {string}   [source.label]            Human-readable label.
- * @param {Array}    [source.usesContext]      Array of context needed by the source only in the editor.
- * @param {Function} [source.getValues]        Function to get the values from the source.
- * @param {Function} [source.setValues]        Function to update multiple values connected to the source.
- * @param {Function} [source.canUserEditValue] Function to determine if the user can edit the value.
- * @param {Function} [source.getFieldsList]    Function to get the lists of fields to expose in the connections panel.
+ * @param {string}   [source.label]            Human-readable label. Optional when it is defined in the server.
+ * @param {Array}    [source.usesContext]      Optional array of context needed by the source only in the editor.
+ * @param {Function} [source.getValues]        Optional function to get the values from the source.
+ * @param {Function} [source.setValues]        Optional function to update multiple values connected to the source.
+ * @param {Function} [source.canUserEditValue] Optional function to determine if the user can edit the value.
  *
  * @example
  * ```js
@@ -7524,8 +7540,9 @@ const unregisterBlockVariation = (blockName, variationName) => {
  * registerBlockBindingsSource( {
  *     name: 'plugin/my-custom-source',
  *     label: _x( 'My Custom Source', 'block bindings source' ),
- *     getValues: () => getSourceValues(),
- *     setValues: () => updateMyCustomValuesInBatch(),
+ *     usesContext: [ 'postType' ],
+ *     getValues: getSourceValues,
+ *     setValues: updateMyCustomValuesInBatch,
  *     canUserEditValue: () => true,
  * } );
  * ```
@@ -7621,7 +7638,7 @@ const registerBlockBindingsSource = source => {
 };
 
 /**
- * Unregisters a block bindings source
+ * Unregisters a block bindings source by providing its name.
  *
  * @param {string} name The name of the block bindings source to unregister.
  *
@@ -7642,7 +7659,7 @@ function unregisterBlockBindingsSource(name) {
 }
 
 /**
- * Returns a registered block bindings source.
+ * Returns a registered block bindings source by its name.
  *
  * @param {string} name Block bindings source name.
  *
@@ -7677,6 +7694,7 @@ function getBlockBindingsSources() {
 
 
 
+
 /**
  * Internal dependencies
  */
@@ -7693,6 +7711,30 @@ k([names, a11y]);
 const ICON_COLORS = ['#191e23', '#f8f9f9'];
 
 /**
+ * Determines whether the block's attribute is equal to the default attribute
+ * which means the attribute is unmodified.
+ * @param {Object} attributeDefinition The attribute's definition of the block type.
+ * @param {*}      value               The attribute's value.
+ * @return {boolean} Whether the attribute is unmodified.
+ */
+function isUnmodifiedAttribute(attributeDefinition, value) {
+  // Every attribute that has a default must match the default.
+  if (attributeDefinition.hasOwnProperty('default')) {
+    return value === attributeDefinition.default;
+  }
+
+  // The rich text type is a bit different from the rest because it
+  // has an implicit default value of an empty RichTextData instance,
+  // so check the length of the value.
+  if (attributeDefinition.type === 'rich-text') {
+    return !value?.length;
+  }
+
+  // Every attribute that doesn't have a default should be undefined.
+  return value === undefined;
+}
+
+/**
  * Determines whether the block's attributes are equal to the default attributes
  * which means the block is unmodified.
  *
@@ -7704,21 +7746,7 @@ function isUnmodifiedBlock(block) {
   var _getBlockType$attribu;
   return Object.entries((_getBlockType$attribu = getBlockType(block.name)?.attributes) !== null && _getBlockType$attribu !== void 0 ? _getBlockType$attribu : {}).every(([key, definition]) => {
     const value = block.attributes[key];
-
-    // Every attribute that has a default must match the default.
-    if (definition.hasOwnProperty('default')) {
-      return value === definition.default;
-    }
-
-    // The rich text type is a bit different from the rest because it
-    // has an implicit default value of an empty RichTextData instance,
-    // so check the length of the value.
-    if (definition.type === 'rich-text') {
-      return !value?.length;
-    }
-
-    // Every attribute that doesn't have a default should be undefined.
-    return value === undefined;
+    return isUnmodifiedAttribute(definition, value);
   });
 }
 
@@ -7732,6 +7760,29 @@ function isUnmodifiedBlock(block) {
  */
 function isUnmodifiedDefaultBlock(block) {
   return block.name === getDefaultBlockName() && isUnmodifiedBlock(block);
+}
+
+/**
+ * Determines whether the block content is unmodified. A block content is
+ * considered unmodified if all the attributes that have a role of 'content'
+ * are equal to the default attributes (or undefined).
+ * If the block does not have any attributes with a role of 'content', it
+ * will be considered unmodified if all the attributes are equal to the default
+ * attributes (or undefined).
+ *
+ * @param {WPBlock} block Block Object
+ * @return {boolean} Whether the block content is unmodified.
+ */
+function isUnmodifiedBlockContent(block) {
+  const contentAttributes = getBlockAttributesNamesByRole(block.name, 'content');
+  if (contentAttributes.length === 0) {
+    return isUnmodifiedBlock(block);
+  }
+  return contentAttributes.every(key => {
+    const definition = getBlockType(block.name)?.attributes[key];
+    const value = block.attributes[key];
+    return isUnmodifiedAttribute(definition, value);
+  });
 }
 
 /**
@@ -7931,7 +7982,7 @@ function __experimentalSanitizeBlockAttributes(name, attributes) {
  *
  * @return {string[]} The attribute names that have the provided role.
  */
-function __experimentalGetBlockAttributesNamesByRole(name, role) {
+function getBlockAttributesNamesByRole(name, role) {
   const attributes = getBlockType(name)?.attributes;
   if (!attributes) {
     return [];
@@ -7940,8 +7991,31 @@ function __experimentalGetBlockAttributesNamesByRole(name, role) {
   if (!role) {
     return attributesNames;
   }
-  return attributesNames.filter(attributeName => attributes[attributeName]?.__experimentalRole === role);
+  return attributesNames.filter(attributeName => {
+    const attribute = attributes[attributeName];
+    if (attribute?.role === role) {
+      return true;
+    }
+    if (attribute?.__experimentalRole === role) {
+      external_wp_deprecated_default()('__experimentalRole attribute', {
+        since: '6.7',
+        version: '6.8',
+        alternative: 'role attribute',
+        hint: `Check the block.json of the ${name} block.`
+      });
+      return true;
+    }
+    return false;
+  });
 }
+const __experimentalGetBlockAttributesNamesByRole = (...args) => {
+  external_wp_deprecated_default()('__experimentalGetBlockAttributesNamesByRole', {
+    since: '6.7',
+    version: '6.8',
+    alternative: 'getBlockAttributesNamesByRole'
+  });
+  return getBlockAttributesNamesByRole(...args);
+};
 
 /**
  * Return a new object with the specified keys omitted.
@@ -8296,6 +8370,11 @@ function getMergedUsesContext(existingUsesContext = [], newUsesContext = []) {
 function blockBindingsSources(state = {}, action) {
   switch (action.type) {
     case 'ADD_BLOCK_BINDINGS_SOURCE':
+      // Only open this API in Gutenberg and for `core/post-meta` for the moment.
+      let getFieldsList;
+      if (false) {} else if (action.name === 'core/post-meta') {
+        getFieldsList = action.getFieldsList;
+      }
       return {
         ...state,
         [action.name]: {
@@ -8304,8 +8383,9 @@ function blockBindingsSources(state = {}, action) {
           usesContext: getMergedUsesContext(state[action.name]?.usesContext, action.usesContext),
           getValues: action.getValues,
           setValues: action.setValues,
-          canUserEditValue: action.canUserEditValue,
-          getFieldsList: action.getFieldsList
+          // Only set `canUserEditValue` if `setValues` is also defined.
+          canUserEditValue: action.setValues && action.canUserEditValue,
+          getFieldsList
         }
       };
     case 'ADD_BOOTSTRAPPED_BLOCK_BINDINGS_SOURCE':
@@ -8388,6 +8468,183 @@ function matchesAttributes(blockAttributes, variationAttributes) {
   return blockAttributes === variationAttributes;
 }
 
+;// CONCATENATED MODULE: ./node_modules/@wordpress/blocks/build-module/store/private-selectors.js
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+const ROOT_BLOCK_SUPPORTS = ['background', 'backgroundColor', 'color', 'linkColor', 'captionColor', 'buttonColor', 'headingColor', 'fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'lineHeight', 'padding', 'contentSize', 'wideSize', 'blockGap', 'textDecoration', 'textTransform', 'letterSpacing'];
+
+/**
+ * Filters the list of supported styles for a given element.
+ *
+ * @param {string[]}         blockSupports list of supported styles.
+ * @param {string|undefined} name          block name.
+ * @param {string|undefined} element       element name.
+ *
+ * @return {string[]} filtered list of supported styles.
+ */
+function filterElementBlockSupports(blockSupports, name, element) {
+  return blockSupports.filter(support => {
+    if (support === 'fontSize' && element === 'heading') {
+      return false;
+    }
+
+    // This is only available for links
+    if (support === 'textDecoration' && !name && element !== 'link') {
+      return false;
+    }
+
+    // This is only available for heading, button, caption and text
+    if (support === 'textTransform' && !name && !(['heading', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(element) || element === 'button' || element === 'caption' || element === 'text')) {
+      return false;
+    }
+
+    // This is only available for heading, button, caption and text
+    if (support === 'letterSpacing' && !name && !(['heading', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(element) || element === 'button' || element === 'caption' || element === 'text')) {
+      return false;
+    }
+
+    // Text columns is only available for blocks.
+    if (support === 'textColumns' && !name) {
+      return false;
+    }
+    return true;
+  });
+}
+
+/**
+ * Returns the list of supported styles for a given block name and element.
+ */
+const getSupportedStyles = (0,external_wp_data_namespaceObject.createSelector)((state, name, element) => {
+  if (!name) {
+    return filterElementBlockSupports(ROOT_BLOCK_SUPPORTS, name, element);
+  }
+  const blockType = selectors_getBlockType(state, name);
+  if (!blockType) {
+    return [];
+  }
+  const supportKeys = [];
+
+  // Check for blockGap support.
+  // Block spacing support doesn't map directly to a single style property, so needs to be handled separately.
+  if (blockType?.supports?.spacing?.blockGap) {
+    supportKeys.push('blockGap');
+  }
+
+  // check for shadow support
+  if (blockType?.supports?.shadow) {
+    supportKeys.push('shadow');
+  }
+  Object.keys(__EXPERIMENTAL_STYLE_PROPERTY).forEach(styleName => {
+    if (!__EXPERIMENTAL_STYLE_PROPERTY[styleName].support) {
+      return;
+    }
+
+    // Opting out means that, for certain support keys like background color,
+    // blocks have to explicitly set the support value false. If the key is
+    // unset, we still enable it.
+    if (__EXPERIMENTAL_STYLE_PROPERTY[styleName].requiresOptOut) {
+      if (__EXPERIMENTAL_STYLE_PROPERTY[styleName].support[0] in blockType.supports && getValueFromObjectPath(blockType.supports, __EXPERIMENTAL_STYLE_PROPERTY[styleName].support) !== false) {
+        supportKeys.push(styleName);
+        return;
+      }
+    }
+    if (getValueFromObjectPath(blockType.supports, __EXPERIMENTAL_STYLE_PROPERTY[styleName].support, false)) {
+      supportKeys.push(styleName);
+    }
+  });
+  return filterElementBlockSupports(supportKeys, name, element);
+}, (state, name) => [state.blockTypes[name]]);
+
+/**
+ * Returns the bootstrapped block type metadata for a give block name.
+ *
+ * @param {Object} state Data state.
+ * @param {string} name  Block name.
+ *
+ * @return {Object} Bootstrapped block type metadata for a block.
+ */
+function getBootstrappedBlockType(state, name) {
+  return state.bootstrappedBlockTypes[name];
+}
+
+/**
+ * Returns all the unprocessed (before applying the `registerBlockType` filter)
+ * block type settings as passed during block registration.
+ *
+ * @param {Object} state Data state.
+ *
+ * @return {Array} Unprocessed block type settings for all blocks.
+ */
+function getUnprocessedBlockTypes(state) {
+  return state.unprocessedBlockTypes;
+}
+
+/**
+ * Returns all the block bindings sources registered.
+ *
+ * @param {Object} state Data state.
+ *
+ * @return {Object} All the registered sources and their properties.
+ */
+function getAllBlockBindingsSources(state) {
+  return state.blockBindingsSources;
+}
+
+/**
+ * Returns a specific block bindings source.
+ *
+ * @param {Object} state      Data state.
+ * @param {string} sourceName Name of the source to get.
+ *
+ * @return {Object} The specific block binding source and its properties.
+ */
+function private_selectors_getBlockBindingsSource(state, sourceName) {
+  return state.blockBindingsSources[sourceName];
+}
+
+/**
+ * Determines if any of the block type's attributes have
+ * the content role attribute.
+ *
+ * @param {Object} state         Data state.
+ * @param {string} blockTypeName Block type name.
+ * @return {boolean} Whether block type has content role attribute.
+ */
+const hasContentRoleAttribute = (state, blockTypeName) => {
+  const blockType = selectors_getBlockType(state, blockTypeName);
+  if (!blockType) {
+    return false;
+  }
+  return Object.values(blockType.attributes).some(({
+    role,
+    __experimentalRole
+  }) => {
+    if (role === 'content') {
+      return true;
+    }
+    if (__experimentalRole === 'content') {
+      external_wp_deprecated_default()('__experimentalRole attribute', {
+        since: '6.7',
+        version: '6.8',
+        alternative: 'role attribute',
+        hint: `Check the block.json of the ${blockTypeName} block.`
+      });
+      return true;
+    }
+    return false;
+  });
+};
+
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/blocks/build-module/store/selectors.js
 /**
  * External dependencies
@@ -8400,9 +8657,11 @@ function matchesAttributes(blockAttributes, variationAttributes) {
 
 
 
+
 /**
  * Internal dependencies
  */
+
 
 
 /** @typedef {import('../api/registration').WPBlockVariation} WPBlockVariation */
@@ -9161,168 +9420,15 @@ const selectors_hasChildBlocksWithInserterSupport = (state, blockName) => {
     return selectors_hasBlockSupport(state, childBlockName, 'inserter', true);
   });
 };
-
-/**
- * DO-NOT-USE in production.
- * This selector is created for internal/experimental only usage and may be
- * removed anytime without any warning, causing breakage on any plugin or theme invoking it.
- */
-const __experimentalHasContentRoleAttribute = (0,external_wp_data_namespaceObject.createSelector)((state, blockTypeName) => {
-  const blockType = selectors_getBlockType(state, blockTypeName);
-  if (!blockType) {
-    return false;
-  }
-  return Object.entries(blockType.attributes).some(([, {
-    __experimentalRole
-  }]) => __experimentalRole === 'content');
-}, (state, blockTypeName) => [state.blockTypes[blockTypeName]?.attributes]);
-
-;// CONCATENATED MODULE: ./node_modules/@wordpress/blocks/build-module/store/private-selectors.js
-/**
- * WordPress dependencies
- */
-
-
-/**
- * Internal dependencies
- */
-
-
-
-const ROOT_BLOCK_SUPPORTS = ['background', 'backgroundColor', 'color', 'linkColor', 'captionColor', 'buttonColor', 'headingColor', 'fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'lineHeight', 'padding', 'contentSize', 'wideSize', 'blockGap', 'textDecoration', 'textTransform', 'letterSpacing'];
-
-/**
- * Filters the list of supported styles for a given element.
- *
- * @param {string[]}         blockSupports list of supported styles.
- * @param {string|undefined} name          block name.
- * @param {string|undefined} element       element name.
- *
- * @return {string[]} filtered list of supported styles.
- */
-function filterElementBlockSupports(blockSupports, name, element) {
-  return blockSupports.filter(support => {
-    if (support === 'fontSize' && element === 'heading') {
-      return false;
-    }
-
-    // This is only available for links
-    if (support === 'textDecoration' && !name && element !== 'link') {
-      return false;
-    }
-
-    // This is only available for heading, button, caption and text
-    if (support === 'textTransform' && !name && !(['heading', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(element) || element === 'button' || element === 'caption' || element === 'text')) {
-      return false;
-    }
-
-    // This is only available for heading, button, caption and text
-    if (support === 'letterSpacing' && !name && !(['heading', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(element) || element === 'button' || element === 'caption' || element === 'text')) {
-      return false;
-    }
-
-    // Text columns is only available for blocks.
-    if (support === 'textColumns' && !name) {
-      return false;
-    }
-    return true;
+const __experimentalHasContentRoleAttribute = (...args) => {
+  external_wp_deprecated_default()('__experimentalHasContentRoleAttribute', {
+    since: '6.7',
+    version: '6.8',
+    hint: 'This is a private selector.'
   });
-}
+  return hasContentRoleAttribute(...args);
+};
 
-/**
- * Returns the list of supported styles for a given block name and element.
- */
-const getSupportedStyles = (0,external_wp_data_namespaceObject.createSelector)((state, name, element) => {
-  if (!name) {
-    return filterElementBlockSupports(ROOT_BLOCK_SUPPORTS, name, element);
-  }
-  const blockType = selectors_getBlockType(state, name);
-  if (!blockType) {
-    return [];
-  }
-  const supportKeys = [];
-
-  // Check for blockGap support.
-  // Block spacing support doesn't map directly to a single style property, so needs to be handled separately.
-  if (blockType?.supports?.spacing?.blockGap) {
-    supportKeys.push('blockGap');
-  }
-
-  // check for shadow support
-  if (blockType?.supports?.shadow) {
-    supportKeys.push('shadow');
-  }
-  Object.keys(__EXPERIMENTAL_STYLE_PROPERTY).forEach(styleName => {
-    if (!__EXPERIMENTAL_STYLE_PROPERTY[styleName].support) {
-      return;
-    }
-
-    // Opting out means that, for certain support keys like background color,
-    // blocks have to explicitly set the support value false. If the key is
-    // unset, we still enable it.
-    if (__EXPERIMENTAL_STYLE_PROPERTY[styleName].requiresOptOut) {
-      if (__EXPERIMENTAL_STYLE_PROPERTY[styleName].support[0] in blockType.supports && getValueFromObjectPath(blockType.supports, __EXPERIMENTAL_STYLE_PROPERTY[styleName].support) !== false) {
-        supportKeys.push(styleName);
-        return;
-      }
-    }
-    if (getValueFromObjectPath(blockType.supports, __EXPERIMENTAL_STYLE_PROPERTY[styleName].support, false)) {
-      supportKeys.push(styleName);
-    }
-  });
-  return filterElementBlockSupports(supportKeys, name, element);
-}, (state, name) => [state.blockTypes[name]]);
-
-/**
- * Returns the bootstrapped block type metadata for a give block name.
- *
- * @param {Object} state Data state.
- * @param {string} name  Block name.
- *
- * @return {Object} Bootstrapped block type metadata for a block.
- */
-function getBootstrappedBlockType(state, name) {
-  return state.bootstrappedBlockTypes[name];
-}
-
-/**
- * Returns all the unprocessed (before applying the `registerBlockType` filter)
- * block type settings as passed during block registration.
- *
- * @param {Object} state Data state.
- *
- * @return {Array} Unprocessed block type settings for all blocks.
- */
-function getUnprocessedBlockTypes(state) {
-  return state.unprocessedBlockTypes;
-}
-
-/**
- * Returns all the block bindings sources registered.
- *
- * @param {Object} state Data state.
- *
- * @return {Object} All the registered sources and their properties.
- */
-function getAllBlockBindingsSources(state) {
-  return state.blockBindingsSources;
-}
-
-/**
- * Returns a specific block bindings source.
- *
- * @param {Object} state      Data state.
- * @param {string} sourceName Name of the source to get.
- *
- * @return {Object} The specific block binding source and its properties.
- */
-function private_selectors_getBlockBindingsSource(state, sourceName) {
-  return state.blockBindingsSources[sourceName];
-}
-
-;// CONCATENATED MODULE: external ["wp","deprecated"]
-const external_wp_deprecated_namespaceObject = window["wp"]["deprecated"];
-var external_wp_deprecated_default = /*#__PURE__*/__webpack_require__.n(external_wp_deprecated_namespaceObject);
 ;// CONCATENATED MODULE: ./node_modules/is-plain-object/dist/is-plain-object.mjs
 /*!
  * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
@@ -10557,6 +10663,7 @@ const external_ReactJSXRuntime_namespaceObject = window["ReactJSXRuntime"];
 
 
 
+
 /**
  * Internal dependencies
  */
@@ -10757,7 +10864,16 @@ function getCommentAttributes(blockType, attributes) {
     }
 
     // Ignore all local attributes
+    if (attributeSchema.role === 'local') {
+      return accumulator;
+    }
     if (attributeSchema.__experimentalRole === 'local') {
+      external_wp_deprecated_default()('__experimentalRole attribute', {
+        since: '6.7',
+        version: '6.8',
+        alternative: 'role attribute',
+        hint: `Check the block.json of the ${blockType?.name} block.`
+      });
       return accumulator;
     }
 
@@ -15765,10 +15881,7 @@ function synchronizeBlocksWithTemplate(blocks = [], template) {
 
 const privateApis = {};
 lock(privateApis, {
-  registerBlockBindingsSource: registerBlockBindingsSource,
-  unregisterBlockBindingsSource: unregisterBlockBindingsSource,
-  getBlockBindingsSource: getBlockBindingsSource,
-  getBlockBindingsSources: getBlockBindingsSources
+  isUnmodifiedBlockContent: isUnmodifiedBlockContent
 });
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/blocks/build-module/deprecated.js
