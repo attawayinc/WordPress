@@ -8069,9 +8069,9 @@ function wp_cache_set_last_changed( $group ) {
 	 *
 	 * @since 6.3.0
 	 *
-	 * @param string    $group         The cache group name.
-	 * @param int       $time          The new last changed time.
-	 * @param int|false $previous_time The previous last changed time. False if not previously set.
+	 * @param string       $group         The cache group name.
+	 * @param string       $time          The new last changed time (msec sec).
+	 * @param string|false $previous_time The previous last changed time. False if not previously set.
 	 */
 	do_action( 'wp_cache_set_last_changed', $group, $time, $previous_time );
 
@@ -8090,8 +8090,8 @@ function wp_cache_set_last_changed( $group ) {
 function wp_site_admin_email_change_notification( $old_email, $new_email, $option_name ) {
 	$send = true;
 
-	// Don't send the notification to the default 'admin_email' value.
-	if ( 'you@example.com' === $old_email ) {
+	// Don't send the notification to the default 'admin_email' value or an empty value.
+	if ( 'you@example.com' === $old_email || empty( $old_email ) ) {
 		$send = false;
 	}
 
@@ -9149,8 +9149,8 @@ function wp_fast_hash(
  * Checks whether a plaintext message matches the hashed value. Used to verify values hashed via wp_fast_hash().
  *
  * The function uses Sodium to hash the message and compare it to the hashed value. If the hash is not a generic hash,
- * the hash is treated as a phpass portable hash in order to provide backward compatibility for application passwords
- * which were hashed using phpass prior to WordPress 6.8.0.
+ * the hash is treated as a phpass portable hash in order to provide backward compatibility for passwords and security
+ * keys which were hashed using phpass prior to WordPress 6.8.0.
  *
  * @since 6.8.0
  *
